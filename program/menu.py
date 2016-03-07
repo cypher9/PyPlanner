@@ -3,7 +3,7 @@ Created on 06.03.2016
 
 @author: cypher9
 '''
-from functions import Functions
+from sources.functions import Functions
 
 class pyplanner_menu(object):
     '''
