@@ -4,7 +4,7 @@ Created on 06.03.2016
 @author: cypher9
 '''
 from datetime import datetime
-from event import make_event
+from data.event import make_event
 
 class Functions(object):
     '''

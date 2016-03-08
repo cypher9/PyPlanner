@@ -3,8 +3,8 @@ Created on 08.03.2016
 
 @author: cypher9
 '''
-from info import Info
-from menu import pyplanner_menu
+from src.info import Info
+from src.menu import pyplanner_menu
 
 
 if __name__ == '__main__':
