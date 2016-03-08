@@ -22,14 +22,19 @@ class Functions(object):
             event_title=str(raw_input('Title: '))
             event_description = ""
             stopword = ""
+            first = True
             while True:
-                line = raw_input('Description: ')
+                if first:
+                    line = raw_input('Description: ')
+                    first = False
+                else:
+                    line = raw_input()
                 if line.strip() == stopword:
                     break
                 event_description += "%s\n" % line
-            event_start_date = str(raw_input("Startdate(YYYY-MM-DD: "))
+            event_start_date = str(raw_input("Startdate(YYYY-MM-DD): "))
             event_start_time = str(raw_input("Starttime(HH:MM)24h: "))
-            event_end_date = str(raw_input("Startdate(YYYY-MM-DD: "))
+            event_end_date = str(raw_input("Enddate(YYYY-MM-DD): "))
             event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
