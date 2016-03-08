@@ -7,9 +7,12 @@ v0.0.x-beta
   - add event
   - view events
   - delete event
+  - save events to file
 - exception handling
 
 v0.x.x-beta
 - gpg encryption
+  - symetric
+  - Keychain
 
 
