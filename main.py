@@ -4,7 +4,7 @@ Created on 08.03.2016
 @author: cypher9
 '''
 from src.info import Info
-from src.menu import pyplanner_menu
+from src import functions
 
 
 if __name__ == '__main__':
@@ -12,10 +12,12 @@ if __name__ == '__main__':
     info.start_text()
     info.menu()
 
-    try:
-        option=int(raw_input('Option: '))
-    except ValueError:
-        print "Not a valid option" 
+    
+options = {1 : functions.add_event,                   
+}        
         
-    menu_option = pyplanner_menu(option)
-    pass
+try:
+    option=int(raw_input('Option: '))
+    options[option]()
+except ValueError:
+    print "Not a valid option" 
