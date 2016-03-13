@@ -19,8 +19,10 @@ class Functions(object):
     
     def view_events(self):
         for event in self.eventlist:
-            print(event.event_title + "\n")
-            print(event.event_description)
+            print("\nTitle: " + event.event_title + "\n")
+            print("Description: " + event.event_description)
+            print("Start Datetime: " + str(event.event_start_datetime))
+            print("End Datetime: " + str(event.event_end_datetime) + "\n")
             
     def add_event(self):
         print("Add your event details:\n")
@@ -48,6 +50,7 @@ class Functions(object):
             print "Not a valid input..." 
                
         try:
-            self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime))          
+            self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime)) 
+            self.view_events()         
         except Exception:
             print "Error generating event..."
