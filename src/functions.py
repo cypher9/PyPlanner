@@ -50,7 +50,6 @@ class Functions(object):
             print "Not a valid input..." 
                
         try:
-            self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime)) 
-            self.view_events()         
+            self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime))          
         except Exception:
             print "Error generating event..."
