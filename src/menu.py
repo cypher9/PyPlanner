@@ -13,7 +13,7 @@ class pyplanner_menu(object):
         self.functions.add_event()
  
     def view(self):
-        print("View your events\n")
+        self.functions.view_events()
     
     options = {1 : add,
                2 : view,                   

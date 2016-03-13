@@ -10,12 +10,11 @@ class Functions(object):
     '''
     functions for PyPlanner
     '''
-
     def __init__(self):
         '''
         Constructor
         '''
-     
+        
     def add_event(self):
         print("Add your event details:\n")
         try:
@@ -39,9 +38,16 @@ class Functions(object):
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
         except ValueError:
-            print "Not a valid option" 
+            print "Not a valid option..." 
             
         try:
-            make_event(event_title, event_description, event_start_datetime, event_end_datetime)
+            make_event(event_title, event_description, event_start_datetime, event_end_datetime)          
         except Exception:
-            print "Error writing "
+            print "Error writing event..."
+     
+            
+    def view_events(self):
+        for event in self.event_list:
+            print(event.event_title + "\n")
+            print(event.event_description + "\n")
+        
