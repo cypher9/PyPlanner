@@ -8,12 +8,12 @@ class File(object):
     '''
     classdocs
     '''
-
-
-    def __init__(self, params):
+    
+    def __init__(self):
         '''
         Constructor
         '''
+        print "ich bin jetzt initialisiert"
      
-    
-    def save_file(self):   
+    def irgendwas(self):
+        print "hello"    
