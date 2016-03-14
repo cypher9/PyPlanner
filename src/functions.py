@@ -22,7 +22,7 @@ class Functions(object):
             print("\nTitle: " + event.event_title + "\n")
             print("Description: " + event.event_description)
             print("Start Datetime: " + str(event.event_start_datetime))
-            print("End Datetime: " + str(event.event_end_datetime) + "\n")
+            print("End Datetime: " + str(event.event_end_datetime) + "\n") 
             
     def add_event(self):
         print("Add your event details:\n")
