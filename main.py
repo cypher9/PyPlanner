@@ -16,7 +16,7 @@ if __name__ == '__main__':
 
     
 options = {1 : function.add_event,
-           2 : function.view_events,                   
+           2 : function.view_events
 }        
         
 try:
