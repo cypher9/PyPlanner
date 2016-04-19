@@ -16,7 +16,6 @@ class Functions(object):
     '''
     classdocs
     '''
- 
 
     def prettify(self, elem):
         """
