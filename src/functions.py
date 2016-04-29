@@ -153,3 +153,7 @@ class Functions(object):
             self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime))          
         except Exception:
             print "Error generating event..."
+            
+            
+    def quit(self):
+        sys.exit()
