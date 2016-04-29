@@ -8,24 +8,22 @@ import sys #for saveEvent
 
 from datetime import datetime
 from data.event import make_event
-from xml.etree import ElementTree
-from xml.dom import minidom
-from xml.etree.ElementTree import Element, SubElement
-import xml.etree.ElementTree as ET
-from _elementtree import tostring
+from src.xml_func import get_root, write_xml
 
 class Functions(object):
     '''
     classdocs
-    '''
+    '''   
+    
+    def __init__(self, eventlist):
+        self.eventlist = eventlist
+    
     def xml_to_event(self):
         '''
         writes all events from the xml file in the eventlist
         '''
         try:
-            tree = ET.parse('termine.xml')
-            root = tree.getroot()
-            #print(str(root))
+            root = get_root()
             for event in root.findall('event'):
                 title = event.find('title').text
                 description= event.find('description').text
@@ -36,80 +34,6 @@ class Functions(object):
             
         except:
             print "mistake while reading xml"    
-    def prettify(self, elem):
-        """
-        Return a pretty-printed XML string for the Element.
-        """
-        rough_string = ElementTree.tostring(elem, 'utf-8')
-        reparsed = minidom.parseString(rough_string)
-        return reparsed.toprettyxml(indent="  ")
-    
-    def xmlappend(self,event):
-        '''
-        event to xml format 
-        '''
-        try:
-            tree = ET.parse('termine.xml')
-            root = tree.getroot()
-
-            b = ET.SubElement(root, 'event')
-            
-            child = ET.SubElement(b, 'title')
-            child.text= event.event_title
-        
-            child = ET.SubElement(b, 'description')
-            child.text= event.event_description.rstrip()
-        
-            child = ET.SubElement(b, 'startdatetime')
-            child.text= str(event.event_start_datetime)
-        
-            child = ET.SubElement(b, 'enddatetime')
-            child.text= str(event.event_end_datetime)
-        
-        
-            xmlfile=open('termine.xml','w')
-            l=tostring(root)
-            xmlfile.write(l)     
-            xmlfile.close
-        except: 
-            #if there is no xml file...
-            self.makeXML(event)
-        
-    def makeXML(self, event):     
-        '''
-        create new, empty xml file and writes the first event 
-        '''  
-        try:   
-            root = Element('planner')
-            
-            top = SubElement(root, 'event')
-            
-            child = SubElement(top, 'title')
-            child.text = event.event_title
-            
-            child = SubElement(top, 'description')
-            child.text = event.event_description.rstrip()
-            
-            child = SubElement(top, 'startdatetime')
-            child.text = str(event.event_start_datetime)
-            
-            child = SubElement(top, 'enddatetime')
-            child.text = str(event.event_end_datetime)
-            
-            xmlfile=open('termine.xml','a')
-            l=tostring(root)
-            xmlfile.write(l)
-            
-            
-            xmlfile.close
-        except:
-            print('Something went wrong! Can\'t tell what?')
-            sys.exit(0) # quit Python
-            
-            
-    def __init__(self, eventlist):
-        self.eventlist = eventlist
-        
 
     def add_event_to_list(self, event):
         self.eventlist.append(event)
@@ -144,7 +68,7 @@ class Functions(object):
             event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
-            self.xmlappend(make_event(event_title, event_description, event_start_datetime, event_end_datetime))
+            write_xml(make_event(event_title, event_description, event_start_datetime, event_end_datetime))
             #self.makeXML(make_event(event_title, event_description, event_start_datetime, event_end_datetime)) #make txt saveEvent
         except ValueError:
             print "Not a valid input..." 
@@ -156,4 +80,4 @@ class Functions(object):
             
             
     def quit(self):
-        sys.exit()
+        sys.exit(0)
