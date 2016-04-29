@@ -1,0 +1,5 @@
+<planner><event><title>erstes</title><description>eins</description><startdatetime>2016-01-01 00:00:00</startdatetime><enddatetime>2016-01-02 00:00:00</enddatetime></event><event><title>zweites</title><description>zwei</description><startdatetime>2016-01-03 01:00:00</startdatetime><enddatetime>2016-01-04 01:00:00</enddatetime></event><event><title>drittes</title><description>drei</description><startdatetime>2016-01-01 12:00:00</startdatetime><enddatetime>2016-01-02 14:00:00</enddatetime></event><event><title>test</title><description>test
+test</description><startdatetime>2016-04-28 10:00:00</startdatetime><enddatetime>2016-04-28 11:00:00</enddatetime></event><event><title>asdasd</title><description>asdasd
+asd
+asd
+asd</description><startdatetime>2016-01-12 12:00:00</startdatetime><enddatetime>2016-01-12 13:00:00</enddatetime></event></planner>
