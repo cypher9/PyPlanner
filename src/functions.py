@@ -5,6 +5,7 @@ Created on 06.03.2016
 '''
 
 import sys #for saveEvent
+import calendar
 
 from datetime import datetime
 from data.event import make_event
@@ -78,6 +79,17 @@ class Functions(object):
         except Exception:
             print "Error generating event..."
             
+     
+    def print_calendar(self):
+        year = int(input('Enter year: '))
+        month = int(raw_input('Enter month (optional): ') or 0)
+        
+        if month is 0:
+            print(calendar.TextCalendar().formatyear(year))
+        else:
+            print(calendar.month(year,month))
+            
+        
             
     def quit(self):
         sys.exit(0)

@@ -22,4 +22,5 @@ class Info(object):
         print("Select what you want to do")
         print("1 - Add an event")
         print("2 - View my events")
-        print("3 - Quit")
+        print("3 - Show calendar")
+        print("4 - Quit")
