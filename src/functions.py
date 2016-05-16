@@ -9,7 +9,7 @@ import calendar
 
 from datetime import datetime
 from data.event import make_event
-from src.xml_func import get_root, create_xml
+from src.xml_func import get_root, create_xml, write_xml
 
 class Functions(object):
     '''
@@ -38,6 +38,7 @@ class Functions(object):
 
     def create_calendar(self):
         cal_name = str(raw_input("Calendar name: "))
+        create_xml(cal_name)
         
     def select_calendar(self):
         cal_select = str(raw_input("Select Calendar: "))
@@ -79,7 +80,7 @@ class Functions(object):
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
             new_event = make_event(event_title, event_description, event_start_datetime, event_end_datetime)
-            create_xml(new_event)
+            create_xml("caltest", new_event)
             
         except ValueError:
             print "Not a valid input..." 
