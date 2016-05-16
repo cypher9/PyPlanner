@@ -10,6 +10,7 @@ import calendar
 from datetime import datetime
 from data.event import make_event
 from src.xml_func import get_root, create_xml
+from _elementtree import Element
 
 class Functions(object):
     '''
@@ -21,7 +22,7 @@ class Functions(object):
     
     def xml_to_event(self, cal_name):
         '''
-        writes all events from the xml file in the eventlist
+        writes all events from xml to eventlist
         '''
         try:
             root = get_root()
@@ -36,11 +37,18 @@ class Functions(object):
                     enddatetime = event.find('enddatetime').text
                     self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))   
         except:
-            print "mistake while reading xml"    
+            print "failed to read xml"    
         
         
     def view_calendars(self):
-        print("Available Calendars:\n")
+        print("Available Calendars:")
+        tree = get_root()
+        if tree is None:
+            print("There are no calendars to show! \n Go on and create one.")
+        else:
+            for element in list(tree.iter('calendar')):
+                print element
+            
     
     def add_event_to_list(self, event):
         self.eventlist.append(event)
@@ -79,6 +87,8 @@ class Functions(object):
             event_calendar = str(raw_input("Select calendar: "))
             new_event = make_event(event_calendar, event_title, event_description, event_start_datetime, event_end_datetime)
             create_xml(event_calendar, new_event)
+            
+            print("\n event saved \n\n")
             
         except ValueError:
             print "Not a valid input..." 
