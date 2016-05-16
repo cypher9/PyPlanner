@@ -93,7 +93,7 @@ class Functions(object):
             new_event = make_event(event_calendar, event_title, event_description, event_start_datetime, event_end_datetime)
             create_xml(event_calendar, new_event)
             
-            print("\n event saved \n\n")
+            print("\n...event saved...\n\n")
             
         except ValueError:
             print "Not a valid input..." 
