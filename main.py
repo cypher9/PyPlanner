@@ -14,10 +14,12 @@ if __name__ == '__main__':
     function = Functions(eventlist)
     
     
-options = {1 : function.add_event,
-           2 : function.view_events,
-           3 : function.print_calendar,
-           4 : function.quit
+options = {0 : function.create_calendar,
+           1 : function.add_event,
+           2 : function.view_calendars,
+           3 : function.view_events,
+           4 : function.print_calendar,
+           5 : function.quit
 }
         
 try:

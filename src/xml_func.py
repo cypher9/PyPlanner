@@ -46,15 +46,6 @@ def write_xml(event):
         xmlfile.close
     except:
         print("Error writing file!")
-
-
-def prettify(self, elem):
-    """
-    Return a pretty-printed XML string for the Element.
-    """
-    rough_string = ElementTree.tostring(elem, 'utf-8')
-    reparsed = minidom.parseString(rough_string)
-    return reparsed.toprettyxml(indent="  ")
         
         
     

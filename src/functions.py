@@ -36,6 +36,15 @@ class Functions(object):
         except:
             print "mistake while reading xml"    
 
+    def create_calendar(self):
+        cal_name = str(raw_input("Calendar name: "))
+        
+    def select_calendar(self):
+        cal_select = str(raw_input("Select Calendar: "))
+        
+    def view_calendars(self):
+        print("Available Calendars:\n")
+    
     def add_event_to_list(self, event):
         self.eventlist.append(event)
     
@@ -69,12 +78,13 @@ class Functions(object):
             event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
-            write_xml(make_event(event_title, event_description, event_start_datetime, event_end_datetime))
+            new_event = make_event(event_title, event_description, event_start_datetime, event_end_datetime)
+            write_xml(new_event)
         except ValueError:
             print "Not a valid input..." 
                
         try:
-            self.add_event_to_list(make_event(event_title, event_description, event_start_datetime, event_end_datetime))          
+            self.add_event_to_list(new_event)          
         except Exception:
             print "Error generating event..."
             
