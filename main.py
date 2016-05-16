@@ -16,7 +16,8 @@ if __name__ == '__main__':
     
 options = {1 : function.add_event,
            2 : function.view_events,
-           3 : function.quit
+           3 : function.print_calendar,
+           4 : function.quit
 }
         
 try:
