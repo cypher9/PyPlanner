@@ -20,9 +20,7 @@ class Info(object):
         
     def menu(self):
         print("Select what you want to do")
-        print("0 - Create calendar")
         print("1 - Add an event")
-        print("2 - View calendars")
-        print("3 - View my events")
-        print("4 - Show calendar")
-        print("5 - Quit")
+        print("2 - View my events")
+        print("3 - Show calendar")
+        print("4 - Quit")

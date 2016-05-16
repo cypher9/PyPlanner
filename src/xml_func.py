@@ -24,13 +24,15 @@ def create_xml(cal_name, event = None):
     try:
         if os.path.isfile("termine.xml"):
             xml_root = get_root()
-            xml_calname = ET.SubElement(xml_root, cal_name)
+            xml_calname = ET.Element.find(xml_root, cal_name)
+            if xml_calname is None:
+                xml_calname = ET.SubElement(xml_root, cal_name)
             xml_event = ET.SubElement(xml_calname, 'event')
         else:
             xml_root = ET.Element('planner')
             xml_calname = ET.SubElement(xml_root, cal_name)
             xml_event = ET.SubElement(xml_calname, 'event')
-        if event:
+        if event is not None:
             child = ET.SubElement(xml_event, 'title')
             child.text= event.event_title
         
