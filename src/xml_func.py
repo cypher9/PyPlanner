@@ -5,7 +5,6 @@ Created on 29.04.2016
 '''
 import os.path
 
-from xml.etree.ElementTree import Element, SubElement
 import xml.etree.ElementTree as ET
 from _elementtree import tostring
  
