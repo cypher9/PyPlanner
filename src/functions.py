@@ -10,7 +10,6 @@ import calendar
 from datetime import datetime
 from data.event import make_event
 from src.xml_func import get_root, create_xml
-from _elementtree import Element
 
 class Functions(object):
     '''
