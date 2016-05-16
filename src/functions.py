@@ -19,18 +19,22 @@ class Functions(object):
     def __init__(self, eventlist):
         self.eventlist = eventlist
     
-    def xml_to_event(self):
+    def xml_to_event(self, cal_name):
         '''
         writes all events from the xml file in the eventlist
         '''
         try:
             root = get_root()
-            for event in root.findall('event'):
-                title = event.find('title').text
-                description= event.find('description').text
-                startdatetime = event.find('startdatetime').text
-                enddatetime = event.find('enddatetime').text
-                self.add_event_to_list(make_event(title, description, startdatetime, enddatetime))
+            cal = root.find(cal_name)
+            if cal is None:
+                print ("No calendar found!")
+            else:
+                for event in cal.findall('event'):
+                    title = event.find('title').text
+                    description= event.find('description').text
+                    startdatetime = event.find('startdatetime').text
+                    enddatetime = event.find('enddatetime').text
+                    self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))
                 
             
         except:
@@ -44,7 +48,8 @@ class Functions(object):
         self.eventlist.append(event)
     
     def view_events(self):
-        self.xml_to_event()
+        cal_name = str(raw_input("Select calendar: "))
+        self.xml_to_event(cal_name)
         for event in self.eventlist:
             print("\nTitle: " + event.event_title + "\n")
             print("Description: " + event.event_description)
