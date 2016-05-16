@@ -9,7 +9,7 @@ import calendar
 
 from datetime import datetime
 from data.event import make_event
-from src.xml_func import get_root, create_xml, write_xml
+from src.xml_func import get_root, create_xml
 
 class Functions(object):
     '''
@@ -34,9 +34,7 @@ class Functions(object):
                     description= event.find('description').text
                     startdatetime = event.find('startdatetime').text
                     enddatetime = event.find('enddatetime').text
-                    self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))
-                
-            
+                    self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))   
         except:
             print "mistake while reading xml"    
         
