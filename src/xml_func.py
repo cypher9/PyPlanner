@@ -11,39 +11,44 @@ from _elementtree import tostring
 def write_xml(xml_doc):
     xmlfile=open('termine.xml','w')
     xmlfile.write(xml_doc)     
-    xmlfile.close
-        
-        
+    xmlfile.close      
 
 def get_root():
     return ET.parse('termine.xml').getroot()
 
+def set_calname(cal_name, xml_root):
+    xml_calname = ET.SubElement(xml_root, 'calendar')
+    xml_calname.set('name', cal_name)
+    
+    return xml_calname
+   
+
 def create_xml(cal_name, event = None):
     xml_root = None
-    xml_event = None
+    xml_calname = None
     try:
         if os.path.isfile("termine.xml"):
-            xml_root = get_root()
-            xml_calname = ET.Element.find(xml_root, cal_name)
+            xml_root = get_root()  
+                
+            for cal in xml_root.findall('calendar'):
+                if cal.attrib['name'] == cal_name:
+                    xml_calname = cal
+                    break
+    
             if xml_calname is None:
-                xml_calname = ET.SubElement(xml_root, cal_name)
-            xml_event = ET.SubElement(xml_calname, 'event')
+                xml_calname = set_calname(cal_name, xml_root)
+                
         else:
             xml_root = ET.Element('planner')
-            xml_calname = ET.SubElement(xml_root, cal_name)
-            xml_event = ET.SubElement(xml_calname, 'event')
+            xml_calname = set_calname(cal_name, xml_root)
+        
+        xml_event = ET.SubElement(xml_calname, 'event')
+        
         if event is not None:
-            child = ET.SubElement(xml_event, 'title')
-            child.text= event.event_title
-        
-            child = ET.SubElement(xml_event, 'description')
-            child.text= event.event_description.rstrip()
-        
-            child = ET.SubElement(xml_event, 'startdatetime')
-            child.text= str(event.event_start_datetime)
-        
-            child = ET.SubElement(xml_event, 'enddatetime')
-            child.text= str(event.event_end_datetime)
+            xml_event.set('title', event.event_title)
+            xml_event.set('description', event.event_description)
+            xml_event.set('startdatetime', str(event.event_start_datetime))
+            xml_event.set('enddatetime', str(event.event_end_datetime))
     
         doc=tostring(xml_root)
         write_xml(doc)
