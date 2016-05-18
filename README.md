@@ -10,6 +10,8 @@ what is working v0.0.2-beta:
 
 ToDo:
 v0.0.x-beta
+- delete calendar
+- delete event
 - exception handling
 
 v0.x.x-beta
