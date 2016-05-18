@@ -21,26 +21,37 @@ class Functions(object):
     
     def xml_to_event(self, cal_name):
         '''
-        writes all events from the xml file in the eventlist
+        writes all events from xml to eventlist
         '''
         try:
-            root = get_root()
-            cal = root.find(cal_name)
-            if cal is None:
+            xml_root = get_root()
+            for cal in xml_root.findall('calendar'):
+                if cal.attrib['name'] == cal_name:
+                    xml_calname = cal
+                    break
+            if xml_calname is None:
                 print ("No calendar found!")
             else:
-                for event in cal.findall('event'):
-                    title = event.find('title').text
-                    description= event.find('description').text
-                    startdatetime = event.find('startdatetime').text
-                    enddatetime = event.find('enddatetime').text
+                self.eventlist =[]
+                for event in xml_calname.findall('event'):
+                    title = event.attrib['title']
+                    description= event.attrib['description']
+                    startdatetime = event.attrib['startdatetime']
+                    enddatetime = event.attrib['enddatetime']
                     self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))   
         except:
-            print "mistake while reading xml"    
+            print "failed to read xml"    
         
         
     def view_calendars(self):
-        print("Available Calendars:\n")
+        print("Available Calendars:")
+        tree = get_root()
+        if tree is None:
+            print("There are no calendars to show! \n Go on and create one.")
+        else:
+            for element in list(tree.iter('calendar')):
+                print ("- " + element.attrib['name'])
+        print "\n\n"   
     
     def add_event_to_list(self, event):
         self.eventlist.append(event)
@@ -49,10 +60,12 @@ class Functions(object):
         cal_name = str(raw_input("Select calendar: "))
         self.xml_to_event(cal_name)
         for event in self.eventlist:
-            print("\nTitle: " + event.event_title + "\n")
+            print("\n**************************")
+            print("Title: " + event.event_title)
             print("Description: " + event.event_description)
             print("Start Datetime: " + str(event.event_start_datetime))
-            print("End Datetime: " + str(event.event_end_datetime) + "\n") 
+            print("End Datetime: " + str(event.event_end_datetime))
+            print("**************************")
             
     def add_event(self):
         print("Add your event details:\n")
@@ -79,6 +92,8 @@ class Functions(object):
             event_calendar = str(raw_input("Select calendar: "))
             new_event = make_event(event_calendar, event_title, event_description, event_start_datetime, event_end_datetime)
             create_xml(event_calendar, new_event)
+            
+            print("\n...event saved...\n\n")
             
         except ValueError:
             print "Not a valid input..." 
