@@ -40,33 +40,12 @@ class Functions(object):
                     enddatetime = event.attrib['enddatetime']
                     self.add_event_to_list(make_event(cal, title, description, startdatetime, enddatetime))   
         except:
-            print "failed to read xml"    
-        
-        
-    def view_calendars(self):
-        print("Available Calendars:")
-        tree = get_root()
-        if tree is None:
-            print("There are no calendars to show! \n Go on and create one.")
-        else:
-            for element in list(tree.iter('calendar')):
-                print ("- " + element.attrib['name'])
-        print "\n\n"   
-    
-    def add_event_to_list(self, event):
-        self.eventlist.append(event)
-    
-    def view_events(self):
-        cal_name = str(raw_input("Select calendar: "))
-        self.xml_to_event(cal_name)
-        for event in self.eventlist:
-            print("\n**************************")
-            print("Title: " + event.event_title)
-            print("Description: " + event.event_description)
-            print("Start Datetime: " + str(event.event_start_datetime))
-            print("End Datetime: " + str(event.event_end_datetime))
-            print("**************************")
+            print "failed to read xml" 
             
+
+    def add_event_to_list(self, event):
+        self.eventlist.append(event)   
+        
     def add_event(self):
         print("Add your event details:\n")
         try:
@@ -102,6 +81,31 @@ class Functions(object):
             self.add_event_to_list(new_event)          
         except Exception:
             print "Error generating event..."
+    
+        
+    def view_calendars(self):
+        print("Available Calendars:")
+        tree = get_root()
+        if tree is None:
+            print("There are no calendars to show! \n Go on and create one.")
+        else:
+            for element in list(tree.iter('calendar')):
+                print ("- " + element.attrib['name'])
+        print "\n\n"   
+    
+
+    def view_events(self):
+        cal_name = str(raw_input("Select calendar: "))
+        self.xml_to_event(cal_name)
+        for event in self.eventlist:
+            print("\n**************************")
+            print("Title: " + event.event_title)
+            print("Description: " + event.event_description)
+            print("Start Datetime: " + str(event.event_start_datetime))
+            print("End Datetime: " + str(event.event_end_datetime))
+            print("**************************")
+            
+    
             
      
     def print_calendar(self):
