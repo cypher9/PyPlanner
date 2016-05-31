@@ -78,14 +78,12 @@ class Functions(object):
             new_event = make_event(event_title, event_description, event_start_datetime, event_end_datetime)
             
             cal = self.first(cal for cal in self.cal_list if cal.calendar_title == event_calendar)
-            print cal
             if cal is None:
                 eventlist = []
                 eventlist.append(new_event)
                 self.add_cal_to_list(make_cal(event_calendar, eventlist))
             else:
                 cal.eventlist.append(new_event)
-            print len(self.cal_list)
             create_xml(self.cal_list)
             
             print("\n...event saved...\n\n") 

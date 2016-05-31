@@ -26,10 +26,8 @@ def set_calname(cal_name, xml_root):
 def create_xml(cal_list):
     xml_root = None
     try:
-        xml_root = ET.Element('planner')
-        print len(cal_list)   
+        xml_root = ET.Element('planner')   
         for cal in cal_list:
-            print "1"
             xml_calname = set_calname(cal.calendar_title, xml_root)
             for event in cal.eventlist:
                 xml_event = ET.SubElement(xml_calname, 'event')
