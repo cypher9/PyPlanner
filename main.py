@@ -10,8 +10,7 @@ from src.functions import Functions
 if __name__ == '__main__':
     info = Info()
     info.start_text()
-    eventlist = []
-    function = Functions(eventlist)
+    function = Functions()
     
     
 options = {1 : function.add_event,
@@ -24,6 +23,7 @@ options = {1 : function.add_event,
 try:
     while True:
         info.menu()
+        function.xml_to_cal()
         option=int(raw_input('Option: '))
         options[option]()
 except ValueError:

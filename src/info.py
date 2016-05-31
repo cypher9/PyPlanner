@@ -19,9 +19,12 @@ class Info(object):
         print("help")
         
     def menu(self):
-        print("Select what you want to do")
+        print("\nSelect what you want to do")
         print("1 - Add an event")
-        print("2 - View calendars")
-        print("3 - View my events")
-        print("4 - Show calendar")
-        print("5 - Quit")
+        print("2 - Search")
+        print("3 - View calendars")
+        print("4 - View my events")
+        print("5 - Delete calendar")
+        print("6 - Delete event")
+        print("7 - Show calendar")
+        print("0 - Quit")

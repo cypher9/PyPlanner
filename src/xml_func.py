@@ -23,34 +23,23 @@ def set_calname(cal_name, xml_root):
     return xml_calname
    
 
-def create_xml(cal_name, event = None):
+def create_xml(cal_list):
     xml_root = None
-    xml_calname = None
     try:
-        if os.path.isfile("termine.xml"):
-            xml_root = get_root()  
-                
-            for cal in xml_root.findall('calendar'):
-                if cal.attrib['name'] == cal_name:
-                    xml_calname = cal
-                    break
-    
-            if xml_calname is None:
-                xml_calname = set_calname(cal_name, xml_root)
-                
-        else:
-            xml_root = ET.Element('planner')
-            xml_calname = set_calname(cal_name, xml_root)
-        
-        xml_event = ET.SubElement(xml_calname, 'event')
-        
-        if event is not None:
-            xml_event.set('title', event.event_title)
-            xml_event.set('description', event.event_description)
-            xml_event.set('startdatetime', str(event.event_start_datetime))
-            xml_event.set('enddatetime', str(event.event_end_datetime))
+        xml_root = ET.Element('planner')
+        print len(cal_list)   
+        for cal in cal_list:
+            print "1"
+            xml_calname = set_calname(cal.calendar_title, xml_root)
+            for event in cal.eventlist:
+                xml_event = ET.SubElement(xml_calname, 'event')
+                xml_event.set('title', event.event_title)
+                xml_event.set('description', event.event_description)
+                xml_event.set('startdatetime', str(event.event_start_datetime))
+                xml_event.set('enddatetime', str(event.event_end_datetime))
     
         doc=tostring(xml_root)
+        print doc
         write_xml(doc)
 
     except:
