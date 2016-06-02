@@ -111,7 +111,7 @@ class Functions(object):
                 found = True
                 
             for event in cal.eventlist:
-                if search_str in event.event_title:
+                if (search_str in event.event_title) or (search_str in event.event_description) :
                     self.print_event(event)
                     found = True
         
