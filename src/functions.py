@@ -22,6 +22,14 @@ class Functions(object):
             return item
         return default
     
+    def print_event(self, event):
+        print("\n**************************")
+        print("Title: " + event.event_title)
+        print("Description: " + event.event_description)
+        print("Start Datetime: " + str(event.event_start_datetime))
+        print("End Datetime: " + str(event.event_end_datetime))
+        print("**************************")
+    
     def xml_to_cal(self):
         '''
         writes all calendars from xml to eventlist
@@ -93,7 +101,22 @@ class Functions(object):
                
                     
 
-            
+    def search_cal(self):
+        search_str = str(raw_input("\nPlease enter search term: "))
+        found = False
+        print"\n"
+        for cal in self.cal_list:
+            if search_str in cal.calendar_title:
+                print "Calendar: " + cal.calendar_title
+                found = True
+                
+            for event in cal.eventlist:
+                if search_str in event.event_title:
+                    self.print_event(event)
+                    found = True
+        
+        if not found:
+            print "There are no matches for your search!"               
     
         
     def view_calendars(self):
@@ -111,14 +134,11 @@ class Functions(object):
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is not None:
             for event in cal.eventlist:
-                print("\n**************************")
-                print("Title: " + event.event_title)
-                print("Description: " + event.event_description)
-                print("Start Datetime: " + str(event.event_start_datetime))
-                print("End Datetime: " + str(event.event_end_datetime))
-                print("**************************")
+                self.print_event(event)
         else:
             print("No calendar found!\n\n")
+            
+    
             
      
     def print_calendar(self):

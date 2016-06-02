@@ -14,10 +14,11 @@ if __name__ == '__main__':
     
     
 options = {1 : function.add_event,
-           2 : function.view_calendars,
-           3 : function.view_events,
-           4 : function.print_calendar,
-           5 : function.quit
+           2 : function.search_cal,
+           3 : function.view_calendars,
+           4 : function.view_events,
+           5 : function.print_calendar,
+           6 : function.quit
 }
         
 try:

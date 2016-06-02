@@ -36,7 +36,6 @@ def create_xml(cal_list):
                 xml_event.set('enddatetime', str(event.event_end_datetime))
     
         doc=tostring(xml_root)
-        print doc
         write_xml(doc)
 
     except:
