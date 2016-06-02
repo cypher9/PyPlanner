@@ -3,7 +3,6 @@ Created on 29.04.2016
 
 @author: cypher9
 '''
-import os.path
 
 import xml.etree.ElementTree as ET
 from _elementtree import tostring
