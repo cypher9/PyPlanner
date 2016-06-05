@@ -19,9 +19,27 @@ class Info(object):
         print("help")
         
     def menu(self):
-        print("Select what you want to do")
+        print("\nSelect what you want to do")
         print("1 - Add an event")
-        print("2 - View calendars")
-        print("3 - View my events")
-        print("4 - Show calendar")
-        print("5 - Quit")
+        print("2 - Search")
+        print("3 - View")
+        print("4 - Delete")
+        print("5 - Show calendar")
+        print("0 - Quit")
+        
+    def submenu_view(self):
+        print("\nSelect what you want to do")
+        print("1 - View calendars")
+        print("2 - View events")
+        print("0 - Main Menu")
+        
+        return int(raw_input('Option: '))
+        
+    def submenu_delete(self):
+        print("\nSelect what you want to do")
+        print("1 - Delete calendar")
+        print("2 - Delete event")
+        print("0 - Main Menu")
+        
+        return int(raw_input('Option: '))
+        
