@@ -139,6 +139,31 @@ class Functions(object):
             print("No calendar found!\n\n")
             
     
+    def delete_calendar(self):
+        cal_name = str(raw_input("Select calendar: "))
+        cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
+        if cal is None:
+            print "no matching calendar found..."
+        else:
+            self.cal_list.remove(cal)
+            create_xml(self.cal_list) 
+            print "...calendar deleted..." 
+            
+    def delete_event(self):
+        found = False
+        event_name = str(raw_input("Select event: "))
+        for cal in self.cal_list:
+            for event in cal.eventlist:
+                if event.event_title == event_name:
+                    cal.eventlist.remove(event)
+                    create_xml(self.cal_list)
+                    print "...event deleted..."
+                    found = True
+                    break
+            if found:
+                break
+        if not found:
+            print "no matching event found..."
             
      
     def print_calendar(self):

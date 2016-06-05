@@ -17,8 +17,10 @@ options = {1 : function.add_event,
            2 : function.search_cal,
            3 : function.view_calendars,
            4 : function.view_events,
-           5 : function.print_calendar,
-           6 : function.quit
+           5 : function.delete_calendar,
+           6 : function.delete_event,
+           7 : function.print_calendar,
+           0 : function.quit
 }
         
 try:

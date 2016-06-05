@@ -8,7 +8,6 @@ class Event(object):
     '''
     classdocs
     '''
-    event_calendar = ""
     event_title = ""
     event_description = ""
     event_start_datetime = ""
@@ -25,7 +24,6 @@ class Event(object):
         
 class Calendar(object):
     calendar_title = ""
-    eventlist = []
     
     def __init__(self, calendar_title, eventlist):
         self.calendar_title = calendar_title
