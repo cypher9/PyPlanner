@@ -176,6 +176,7 @@ class Functions(object):
             print(calendar.month(year,month))
             
         
-            
+    def return_to_main(self):
+        return 0       
     def quit(self):
         sys.exit(0)

@@ -15,19 +15,32 @@ if __name__ == '__main__':
     
 options = {1 : function.add_event,
            2 : function.search_cal,
-           3 : function.view_calendars,
-           4 : function.view_events,
-           5 : function.delete_calendar,
-           6 : function.delete_event,
-           7 : function.print_calendar,
+           3 : info.submenu_view,
+           4 : info.submenu_delete,
+           5 : function.print_calendar,
            0 : function.quit
 }
+
+suboptions_view = {1 : function.view_calendars,
+                   2 : function.view_events,
+                   0 : function.return_to_main,
+}
+
+suboptions_delete = {1 : function.delete_calendar,
+                     2 : function.delete_event,
+                     0 : function.return_to_main,
+}  
         
 try:
     while True:
         info.menu()
         function.xml_to_cal()
         option=int(raw_input('Option: '))
-        options[option]()
+        if option == 3:
+            suboptions_view[options[option]()]()
+        elif option == 4:
+            suboptions_delete[options[option]()]()
+        else:
+            options[option]()
 except ValueError:
     print "Not a valid option" 
