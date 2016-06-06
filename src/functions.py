@@ -50,8 +50,8 @@ class Functions(object):
                         else:
                             title = event.attrib['title']
                             description= event.attrib['description']
-                            startdatetime = event.attrib['startdatetime']
-                            enddatetime = event.attrib['enddatetime']
+                            startdatetime = datetime.strptime(str(event.attrib['startdatetime']), '%Y-%m-%d %H:%M:%S')
+                            enddatetime = datetime.strptime(event.attrib['enddatetime'], '%Y-%m-%d %H:%M:%S')
                             eventlist.append(make_event(title, description, startdatetime, enddatetime))
                 self.add_cal_to_list(make_cal(xml_calname, eventlist)) 
         except:
@@ -101,7 +101,7 @@ class Functions(object):
                
                     
 
-    def search_cal(self):
+    def search_by_string(self):
         search_str = str(raw_input("\nPlease enter search term: "))
         found = False
         print"\n"
@@ -114,6 +114,18 @@ class Functions(object):
                 if (search_str in event.event_title) or (search_str in event.event_description) :
                     self.print_event(event)
                     found = True
+        
+        if not found:
+            print "There are no matches for your search!" 
+            
+    def search_by_date(self):
+        search_date = str(raw_input("Please enter date(YYYY-MM-DD): "))
+        found = False
+        for cal in self.cal_list:
+            for event in cal.eventlist:
+                if search_date == str(event.event_start_datetime.date()):
+                    self.print_event(event)
+                    found = True                    
         
         if not found:
             print "There are no matches for your search!"               

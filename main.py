@@ -14,11 +14,16 @@ if __name__ == '__main__':
     
     
 options = {1 : function.add_event,
-           2 : function.search_cal,
+           2 : info.submenu_search,
            3 : info.submenu_view,
            4 : info.submenu_delete,
            5 : function.print_calendar,
            0 : function.quit
+}
+
+suboptions_search = {1 : function.search_by_string,
+                     2 : function.search_by_date,
+                     3 : function.return_to_main
 }
 
 suboptions_view = {1 : function.view_calendars,
@@ -36,7 +41,9 @@ try:
         info.menu()
         function.xml_to_cal()
         option=int(raw_input('Option: '))
-        if option == 3:
+        if option == 2:
+            suboptions_search[options[option]()]()
+        elif option == 3:
             suboptions_view[options[option]()]()
         elif option == 4:
             suboptions_delete[options[option]()]()

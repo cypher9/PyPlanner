@@ -42,4 +42,12 @@ class Info(object):
         print("0 - Main Menu")
         
         return int(raw_input('Option: '))
+    
+    def submenu_search(self):
+        print("\nSelect what you want to do")
+        print("1 - Search by string")
+        print("2 - Search by date")
+        print("0 - Main Menu")
+        
+        return int(raw_input('Option: '))
         
