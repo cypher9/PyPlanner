@@ -23,7 +23,7 @@ class Info(object):
         print("3 - View")
         print("4 - Delete")
         print("5 - Show calendar")
-        print("9 - Help")
+        print("6 - Help")
         print("0 - Quit \n")
         
         print("Option 1 - Add an event         : Add a new event to an existing calendar or create a new one\n")
@@ -45,7 +45,7 @@ class Info(object):
         
         print("Option 5 - Show calendar        : Display Year or Month calendar\n")
         
-        print("Option 9 - Help                 : Display this help\n")
+        print("Option 6 - Help                 : Display this help\n")
         
         print("Option 0 - Quit                 : Exit PyPlanner")        
         
@@ -59,7 +59,7 @@ class Info(object):
         print("3 - View")
         print("4 - Delete")
         print("5 - Show calendar")
-        print("9 - Help")
+        print("6 - Help")
         print("0 - Quit")
         
     def submenu_view(self):
