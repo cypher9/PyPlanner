@@ -50,8 +50,7 @@ try:
                 if sub_opt <  0 or sub_opt > 2:
                     print("\n...wrong input...\n")
                 else:
-                    suboptions_search[sub_opt]()
-                
+                    suboptions_search[sub_opt]()   
             elif option == 3:
                 sub_opt = options[option]()
                 if sub_opt <  0 or sub_opt > 2:

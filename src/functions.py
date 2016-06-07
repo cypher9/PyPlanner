@@ -62,6 +62,7 @@ class Functions(object):
         
     def add_event(self):
         print("Add your event details:\n")
+        wrong_input = True
         try:
             event_title=str(raw_input('Title: '))
             event_description = ""
@@ -76,10 +77,43 @@ class Functions(object):
                 if line.strip() == stopword:
                     break
                 event_description += "%s\n" % line
-            event_start_date = str(raw_input("Startdate(YYYY-MM-DD): "))
-            event_start_time = str(raw_input("Starttime(HH:MM)24h: "))
-            event_end_date = str(raw_input("Enddate(YYYY-MM-DD): "))
-            event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
+            
+            while wrong_input:
+                try:    
+                    event_start_date = str(raw_input("Startdate(YYYY-MM-DD): "))
+                    datetime.strptime(event_start_date, '%Y-%m-%d')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect date value...\n")
+            
+            wrong_input = True                
+            while wrong_input:
+                try:    
+                    event_start_time = str(raw_input("Starttime(HH:MM)24h: "))
+                    datetime.strptime(event_start_date + " " + event_start_time, '%Y-%m-%d %H:%M')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect time value...\n")
+            
+            wrong_input = True
+            while wrong_input:
+                try:    
+                    event_end_date = str(raw_input("Enddate(YYYY-MM-DD): "))
+                    datetime.strptime(event_end_date, '%Y-%m-%d')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect date value...\n")
+                    
+            wrong_input = True                
+            while wrong_input:
+                try:    
+                    event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
+                    datetime.strptime(event_end_date + " " + event_end_time, '%Y-%m-%d %H:%M')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect time value...\n")
+            
+            
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
             event_calendar = str(raw_input("Select calendar: "))
