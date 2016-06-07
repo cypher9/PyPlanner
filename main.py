@@ -18,6 +18,7 @@ options = {1 : function.add_event,
            3 : info.submenu_view,
            4 : info.submenu_delete,
            5 : function.print_calendar,
+           9 : info.help,
            0 : function.quit
 }
 
