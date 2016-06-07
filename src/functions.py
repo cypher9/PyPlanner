@@ -50,8 +50,8 @@ class Functions(object):
                         else:
                             title = event.attrib['title']
                             description= event.attrib['description']
-                            startdatetime = event.attrib['startdatetime']
-                            enddatetime = event.attrib['enddatetime']
+                            startdatetime = datetime.strptime(str(event.attrib['startdatetime']), '%Y-%m-%d %H:%M:%S')
+                            enddatetime = datetime.strptime(event.attrib['enddatetime'], '%Y-%m-%d %H:%M:%S')
                             eventlist.append(make_event(title, description, startdatetime, enddatetime))
                 self.add_cal_to_list(make_cal(xml_calname, eventlist)) 
         except:
@@ -62,6 +62,7 @@ class Functions(object):
         
     def add_event(self):
         print("Add your event details:\n")
+        wrong_input = True
         try:
             event_title=str(raw_input('Title: '))
             event_description = ""
@@ -76,10 +77,43 @@ class Functions(object):
                 if line.strip() == stopword:
                     break
                 event_description += "%s\n" % line
-            event_start_date = str(raw_input("Startdate(YYYY-MM-DD): "))
-            event_start_time = str(raw_input("Starttime(HH:MM)24h: "))
-            event_end_date = str(raw_input("Enddate(YYYY-MM-DD): "))
-            event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
+            
+            while wrong_input:
+                try:    
+                    event_start_date = str(raw_input("Startdate(YYYY-MM-DD): "))
+                    datetime.strptime(event_start_date, '%Y-%m-%d')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect date value...\n")
+            
+            wrong_input = True                
+            while wrong_input:
+                try:    
+                    event_start_time = str(raw_input("Starttime(HH:MM)24h: "))
+                    datetime.strptime(event_start_date + " " + event_start_time, '%Y-%m-%d %H:%M')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect time value...\n")
+            
+            wrong_input = True
+            while wrong_input:
+                try:    
+                    event_end_date = str(raw_input("Enddate(YYYY-MM-DD): "))
+                    datetime.strptime(event_end_date, '%Y-%m-%d')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect date value...\n")
+                    
+            wrong_input = True                
+            while wrong_input:
+                try:    
+                    event_end_time = str(raw_input("Endtime(HH:MM)24h: "))
+                    datetime.strptime(event_end_date + " " + event_end_time, '%Y-%m-%d %H:%M')
+                    wrong_input = False
+                except ValueError:
+                    print("\n...incorrect time value...\n")
+            
+            
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
             event_calendar = str(raw_input("Select calendar: "))
@@ -101,7 +135,7 @@ class Functions(object):
                
                     
 
-    def search_cal(self):
+    def search_by_string(self):
         search_str = str(raw_input("\nPlease enter search term: "))
         found = False
         print"\n"
@@ -114,6 +148,18 @@ class Functions(object):
                 if (search_str in event.event_title) or (search_str in event.event_description) :
                     self.print_event(event)
                     found = True
+        
+        if not found:
+            print "There are no matches for your search!" 
+            
+    def search_by_date(self):
+        search_date = str(raw_input("Please enter date(YYYY-MM-DD): "))
+        found = False
+        for cal in self.cal_list:
+            for event in cal.eventlist:
+                if search_date == str(event.event_start_datetime.date()):
+                    self.print_event(event)
+                    found = True                    
         
         if not found:
             print "There are no matches for your search!"               
