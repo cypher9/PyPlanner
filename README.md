@@ -19,8 +19,6 @@ v0.0.x-beta
 - bug fixes
 
 v0.x.x-beta
-- gpg encryption
-  - symetric
-  - Keychain
+- encryption with pycrypto
 
 
