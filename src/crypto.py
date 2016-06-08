@@ -24,4 +24,5 @@ def decryption(key, encryptedString):
     key = ''
     cipher = AES.new(key)
     decoded = DecodeAES(cipher, encryption)
-    print decoded
+    
+    return decoded
