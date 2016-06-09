@@ -5,12 +5,23 @@ Created on 08.03.2016
 '''
 from src.info import Info
 from src.functions import Functions
+from src.xml_func import write_xml
+from src.crypto import set_password
+from os.path import isfile
+
 
 
 if __name__ == '__main__':
     info = Info()
     info.start_text()
     function = Functions()
+    KEY = ""
+    if isfile('termine.enc'):
+        function.xml_to_cal()
+    else:
+        set_password()
+        write_xml("")
+        
     
     
 options = {1 : function.add_event,
@@ -39,8 +50,7 @@ suboptions_delete = {1 : function.delete_calendar,
         
 try:
     while True:
-        info.menu()
-        function.xml_to_cal()
+        info.menu()            
         option=int(raw_input('Option: '))
         if option < 0 or option > 6:
             print("\n...wrong input...\n")

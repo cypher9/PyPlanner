@@ -6,14 +6,20 @@ Created on 29.04.2016
 
 import xml.etree.ElementTree as ET
 from _elementtree import tostring
+from src.crypto import encryption, decryption
  
 def write_xml(xml_doc):
-    xmlfile=open('termine.xml','w')
-    xmlfile.write(xml_doc)     
-    xmlfile.close      
+    xmlfile=open('termine.enc','w')
+    xmlfile.write(encryption(xml_doc))     
+    xmlfile.close
+    
+def read_xml():
+    xmlfile = open('termine.enc','r') 
+    xml_doc = xmlfile.read()
+    return xml_doc    
 
 def get_root():
-    return ET.parse('termine.xml').getroot()
+    return ET.fromstring(decryption(read_xml()))
 
 def set_calname(cal_name, xml_root):
     xml_calname = ET.SubElement(xml_root, 'calendar')
