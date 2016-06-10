@@ -53,7 +53,7 @@ try:
     while True:
         info.menu()            
         option=int(raw_input('Option: '))
-        if option < 0 or option > 6:
+        if option < 0 or option > 7:
             print("\n...wrong input...\n")
         else:
             if option == 2:

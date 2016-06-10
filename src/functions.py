@@ -55,7 +55,8 @@ class Functions(object):
                             eventlist.append(make_event(title, description, startdatetime, enddatetime))
                 self.add_cal_to_list(make_cal(xml_calname, eventlist)) 
         except:
-            print "failed to read xml"
+            print "failed to read xml...\nYour password may be incorrect!\nRestart Pyplanner and try again!"
+            self.quit()
             
     def save_cal_list(self):
         create_xml(self.cal_list)
