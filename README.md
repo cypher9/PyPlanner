@@ -26,6 +26,7 @@ what is working v1.0.0-beta:
 
 
 ToDo:
+- build an installer
 - bugfixes
 - performance improvements
 - UX improvements
