@@ -18,25 +18,29 @@ def generate_key(password):
     return key
 
 def get_password():
-    password = getpass.getpass(stream = sys.stderr)
+    password = getpass.getpass("Password: ")
     return password
 
 def set_password():
     global KEY
     not_matching = True
+    print("\nSet new password for Pyplanner!\n(Password must be at least 5 characters!)")
     while not_matching:
-        key = generate_key(get_password())
-        key_repeat = generate_key(getpass.getpass("Repeat Password: "))
-        if key == key_repeat:
-            KEY = key
-            not_matching = False
+        password = get_password()
+        if len(password) < 5:
+            print("Password is too short!")
         else:
-            print("passwords not matching")
+            key = generate_key(password)
+            key_repeat = generate_key(getpass.getpass("Repeat Password: "))
+            if key == key_repeat:
+                KEY = key
+                not_matching = False
+            else:
+                print("passwords not matching")
 
 def change_password():
-    old_pw = generate_key(getpass.getpass("Enter old password: ", stream = sys.stderr))
+    old_pw = generate_key(getpass.getpass("Enter old password: "))
     if KEY == old_pw:
-        print("Provide new password")
         set_password()
     else:
         print("Incorrect password!!")
