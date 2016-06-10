@@ -5,6 +5,10 @@ Pyplanner encrypts the content of your calendar using AES-CBC encryption.
 Your password will not be saved anywhere an is a SHA256 hash while runtime.
 !!!If you lost your password ther is no option to recover your calendar!!!
 
+Prerequisites:
+- python27 (not tested with other versions)
+- PyCrypto
+
 what is working v1.0.0-beta:
 - add a new event
 - create different calendars
