@@ -24,6 +24,7 @@ class Info(object):
         print("4 - Delete")
         print("5 - Show calendar")
         print("6 - Help")
+        print("7 - Change password")
         print("0 - Quit \n")
         
         print("Option 1 - Add an event         : Add a new event to an existing calendar or create a new one\n")
@@ -47,6 +48,8 @@ class Info(object):
         
         print("Option 6 - Help                 : Display this help\n")
         
+        print("Option 7 - Change password      : Change Password for PyPlanner")
+        
         print("Option 0 - Quit                 : Exit PyPlanner")        
         
         raw_input("Press ENTER to go on...")
@@ -60,7 +63,8 @@ class Info(object):
         print("4 - Delete")
         print("5 - Show calendar")
         print("6 - Help")
-        print("0 - Quit")
+        print("7 - Change password")
+        print("0 - Quit\n")
         
     def submenu_view(self):
         print("\nSelect what you want to do")
