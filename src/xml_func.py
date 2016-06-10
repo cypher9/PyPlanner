@@ -28,18 +28,19 @@ def set_calname(cal_name, xml_root):
     return xml_calname
    
 
-def create_xml(cal_list):
+def create_xml(cal_list = None):
     xml_root = None
     try:
-        xml_root = ET.Element('planner')   
-        for cal in cal_list:
-            xml_calname = set_calname(cal.calendar_title, xml_root)
-            for event in cal.eventlist:
-                xml_event = ET.SubElement(xml_calname, 'event')
-                xml_event.set('title', event.event_title)
-                xml_event.set('description', event.event_description)
-                xml_event.set('startdatetime', str(event.event_start_datetime))
-                xml_event.set('enddatetime', str(event.event_end_datetime))
+        xml_root = ET.Element('planner')
+        if cal_list is not None:   
+            for cal in cal_list:
+                xml_calname = set_calname(cal.calendar_title, xml_root)
+                for event in cal.eventlist:
+                    xml_event = ET.SubElement(xml_calname, 'event')
+                    xml_event.set('title', event.event_title)
+                    xml_event.set('description', event.event_description)
+                    xml_event.set('startdatetime', str(event.event_start_datetime))
+                    xml_event.set('enddatetime', str(event.event_end_datetime))
     
         doc=tostring(xml_root)
         write_xml(doc)
