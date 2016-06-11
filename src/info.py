@@ -34,9 +34,10 @@ class Info(object):
         print("Option 2 - 2 - Search by date   : Search all events on one specified date")
         print("Option 2 - 0 - Main menu        : Return to main menu\n")
         
-        print("Option 3 - View:")
-        print("Option 3 - 1 - View calendars   : View all existing calendars")
-        print("Option 3 - 2 - View events      : View all events from one specified calendar\n")
+        print("Option 3 - Show:")
+        print("Option 3 - 1 - Show calendars   : View all existing calendars")
+        print("Option 3 - 2 - Show events      : View all events from one specified calendar")
+        print("Option 3 - 3 - Show next event  : Show the next upcoming event\n")
         print("Option 3 - 0 - Main menu        : Return to main menu\n")
         
         print("Option 4 - Delete:")
@@ -59,7 +60,7 @@ class Info(object):
         print("\nSelect what you want to do")
         print("1 - Add an event")
         print("2 - Search")
-        print("3 - View")
+        print("3 - Show")
         print("4 - Delete")
         print("5 - Show calendar")
         print("6 - Help")
@@ -68,8 +69,9 @@ class Info(object):
         
     def submenu_view(self):
         print("\nSelect what you want to do")
-        print("1 - View calendars")
-        print("2 - View events")
+        print("1 - Show calendars")
+        print("2 - Show events")
+        print("3 - Show next event")
         print("0 - Main Menu")
         
         return int(raw_input('Option: '))

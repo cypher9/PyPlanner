@@ -8,6 +8,7 @@ import sys #for saveEvent
 import calendar
 
 from datetime import datetime
+from operator import attrgetter
 from src.cal import make_event, make_cal
 from src.xml_func import get_root, create_xml
 
@@ -63,6 +64,9 @@ class Functions(object):
             
     def add_cal_to_list(self, cal):
         self.cal_list.append(cal) 
+        
+    def sort_list(self, eventlist):
+        return sorted(eventlist, key=attrgetter('event_start_datetime'))
         
     def add_event(self):
         print("\nAdd your event details:\n")
@@ -127,9 +131,10 @@ class Functions(object):
             if cal is None:
                 eventlist = []
                 eventlist.append(new_event)
-                self.add_cal_to_list(make_cal(event_calendar, eventlist))
+                self.add_cal_to_list(make_cal(event_calendar, self.sort_list(eventlist)))
             else:
                 cal.eventlist.append(new_event)
+                self.sort_list(cal.eventlist)
             self.save_cal_list()
             
             print("\n...event saved...\n\n") 
@@ -169,7 +174,7 @@ class Functions(object):
             print "There are no matches for your search!"               
     
         
-    def view_calendars(self):
+    def show_calendars(self):
         print("\nAvailable Calendars:")
         for cal in self.cal_list:   
             if cal is None:
@@ -179,25 +184,43 @@ class Functions(object):
         print "\n\n"   
     
 
-    def view_events(self):
-        cal_name = str(raw_input("\nSelect cal: "))
+    def show_events(self):
+        cal_name = str(raw_input("\nSelect calendar: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is not None:
             for event in cal.eventlist:
                 self.print_event(event)
         else:
-            print("No cal found!\n\n")
+            print("No calendar found!\n\n")
+            
+    def show_next_event(self):
+        next_event = None
+        tmp_first = None
+        for cal in self.cal_list:
+            for event in cal.eventlist:
+                if tmp_first is None:
+                    tmp_first = event.event_start_datetime
+                tmp_event = event.event_start_datetime
+                if tmp_event <= tmp_first and tmp_event > datetime.now():
+                    tmp_first = tmp_event
+                    next_event = event
+        if next_event is not None:
+            self.print_event(next_event)
+        else:
+            print"\n...no upcoming events...\n"
+                
+        
             
     
     def delete_calendar(self):
-        cal_name = str(raw_input("\nSelect cal: "))
+        cal_name = str(raw_input("\nSelect calendar: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is None:
-            print "no matching cal found..."
+            print "no matching calendar found..."
         else:
             self.cal_list.remove(cal)
             create_xml(self.cal_list) 
-            print "...cal deleted..." 
+            print "...calendar deleted..." 
             
     def delete_event(self):
         found = False
