@@ -8,7 +8,7 @@ import sys #for saveEvent
 import calendar
 
 from datetime import datetime
-from data.calendar import make_event, make_cal
+from src.cal import make_event, make_cal
 from src.xml_func import get_root, create_xml
 
 class Functions(object):
@@ -37,7 +37,7 @@ class Functions(object):
         try:
             self.cal_list = []
             xml_root = get_root()
-            for cal in xml_root.findall('calendar'):
+            for cal in xml_root.findall('cal'):
                 if cal is None:
                     break
                 else:
@@ -65,7 +65,7 @@ class Functions(object):
         self.cal_list.append(cal) 
         
     def add_event(self):
-        print("Add your event details:\n")
+        print("\nAdd your event details:\n")
         wrong_input = True
         try:
             event_title=str(raw_input('Title: '))
@@ -120,7 +120,7 @@ class Functions(object):
             
             event_start_datetime = datetime.strptime(event_start_date + ' ' + event_start_time, '%Y-%m-%d %H:%M')
             event_end_datetime = datetime.strptime(event_end_date + ' ' + event_end_time, '%Y-%m-%d %H:%M')
-            event_calendar = str(raw_input("Select calendar: "))
+            event_calendar = str(raw_input("Select cal: "))
             new_event = make_event(event_title, event_description, event_start_datetime, event_end_datetime)
             
             cal = self.first(cal for cal in self.cal_list if cal.calendar_title == event_calendar)
@@ -135,7 +135,7 @@ class Functions(object):
             print("\n...event saved...\n\n") 
             
         except ValueError:
-            print "Error generating event..." 
+            print "\nError generating event...\n" 
                
                     
 
@@ -157,7 +157,7 @@ class Functions(object):
             print "There are no matches for your search!" 
             
     def search_by_date(self):
-        search_date = str(raw_input("Please enter date(YYYY-MM-DD): "))
+        search_date = str(raw_input("\nPlease enter date(YYYY-MM-DD): "))
         found = False
         for cal in self.cal_list:
             for event in cal.eventlist:
@@ -170,7 +170,7 @@ class Functions(object):
     
         
     def view_calendars(self):
-        print("Available Calendars:")
+        print("\nAvailable Calendars:")
         for cal in self.cal_list:   
             if cal is None:
                 print("There are no calendars to show! \n Go on and create one.")
@@ -180,28 +180,28 @@ class Functions(object):
     
 
     def view_events(self):
-        cal_name = str(raw_input("Select calendar: "))
+        cal_name = str(raw_input("\nSelect cal: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is not None:
             for event in cal.eventlist:
                 self.print_event(event)
         else:
-            print("No calendar found!\n\n")
+            print("No cal found!\n\n")
             
     
     def delete_calendar(self):
-        cal_name = str(raw_input("Select calendar: "))
+        cal_name = str(raw_input("\nSelect cal: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is None:
-            print "no matching calendar found..."
+            print "no matching cal found..."
         else:
             self.cal_list.remove(cal)
             create_xml(self.cal_list) 
-            print "...calendar deleted..." 
+            print "...cal deleted..." 
             
     def delete_event(self):
         found = False
-        event_name = str(raw_input("Select event: "))
+        event_name = str(raw_input("\nSelect event: "))
         for cal in self.cal_list:
             for event in cal.eventlist:
                 if event.event_title == event_name:
@@ -217,7 +217,7 @@ class Functions(object):
             
      
     def print_calendar(self):
-        year = int(input('Enter year: '))
+        year = int(input('\nEnter year: '))
         month = int(raw_input('Enter month (optional): ') or 0)
         
         if month is 0:
