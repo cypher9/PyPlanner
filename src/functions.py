@@ -191,7 +191,7 @@ class Functions(object):
             for event in cal.eventlist:
                 self.print_event(event)
         else:
-            print("No calendar found!\n\n")
+            print("\n...no calendar found...\n")
             
     def show_next_event(self):
         next_event = None
@@ -208,19 +208,17 @@ class Functions(object):
             self.print_event(next_event)
         else:
             print"\n...no upcoming events...\n"
-                
-        
-            
+                      
     
     def delete_calendar(self):
         cal_name = str(raw_input("\nSelect calendar: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is None:
-            print "no matching calendar found..."
+            print "\n...no matching calendar found...\n"
         else:
             self.cal_list.remove(cal)
             create_xml(self.cal_list) 
-            print "...calendar deleted..." 
+            print "\n...calendar deleted...\n" 
             
     def delete_event(self):
         found = False
@@ -230,13 +228,13 @@ class Functions(object):
                 if event.event_title == event_name:
                     cal.eventlist.remove(event)
                     create_xml(self.cal_list)
-                    print "...event deleted..."
+                    print "\n...event deleted...\n"
                     found = True
                     break
             if found:
                 break
         if not found:
-            print "no matching event found..."
+            print "\n...no matching event found...\n"
             
      
     def print_calendar(self):
