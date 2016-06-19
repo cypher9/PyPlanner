@@ -12,7 +12,7 @@ class Info(object):
         print("PyPlanner v1.0.0-beta")
         print("--")
         print("PyPlanner is a simple commandline tool for keeping up with your appointments and events")
-        print("PyPlanner encrypts your database with gpg to make your stuff really private ")
+        print("PyPlanner encrypts your database with PyCrypto to make your stuff really private ")
         print("\n")
         
     def help(self):

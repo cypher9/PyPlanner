@@ -31,6 +31,28 @@ class Functions(object):
         print("End Datetime: " + str(event.event_end_datetime))
         print("**************************")
     
+    def query_yes_no(self, question, default="yes"):
+        valid = {"yes":True, "y":True, "ye":True,
+                 "no":False, "n":False}
+        if default is None:
+            prompt = "[y/n]"
+        elif default == "yes":
+            prompt = "[Y/n]"
+        elif default == "no":
+            prompt = "[y/N]"
+        else:
+            raise ValueError("invalid default answer:'%s'" % default)
+        
+        while True:
+            print(question + prompt)
+            choice = raw_input().lower()
+            if default is not None and choice == "":
+                return valid[default]
+            elif choice in valid:
+                return valid[choice]
+            else:
+                print("Plese respond with 'yes' or 'no' (or 'y' or'n').\n")
+    
     def xml_to_cal(self):
         '''
         writes all calendars from xml to eventlist
@@ -56,7 +78,7 @@ class Functions(object):
                             eventlist.append(make_event(title, description, startdatetime, enddatetime))
                 self.add_cal_to_list(make_cal(xml_calname, eventlist)) 
         except:
-            print "failed to read xml...\nYour password may be incorrect!\nRestart Pyplanner and try again!"
+            print "failed to read xml...\nYour password may be incorrect!\nRestart PyPlanner and try again!"
             self.quit()
             
     def save_cal_list(self):
@@ -212,29 +234,31 @@ class Functions(object):
     
     def delete_calendar(self):
         cal_name = str(raw_input("\nSelect calendar: "))
-        cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
-        if cal is None:
-            print "\n...no matching calendar found...\n"
-        else:
-            self.cal_list.remove(cal)
-            create_xml(self.cal_list) 
-            print "\n...calendar deleted...\n" 
+        if self.query_yes_no("Do you really want to delete this calendar?", "no"):
+            cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
+            if cal is None:
+                print "\n...no matching calendar found...\n"
+            else:
+                self.cal_list.remove(cal)
+                create_xml(self.cal_list) 
+                print "\n...calendar deleted...\n" 
             
     def delete_event(self):
         found = False
         event_name = str(raw_input("\nSelect event: "))
-        for cal in self.cal_list:
-            for event in cal.eventlist:
-                if event.event_title == event_name:
-                    cal.eventlist.remove(event)
-                    create_xml(self.cal_list)
-                    print "\n...event deleted...\n"
-                    found = True
+        if self.query_yes_no("Do you really want to delete this event?", "no"):
+            for cal in self.cal_list:
+                for event in cal.eventlist:
+                    if event.event_title == event_name:
+                        cal.eventlist.remove(event)
+                        create_xml(self.cal_list)
+                        print "\n...event deleted...\n"
+                        found = True
+                        break
+                if found:
                     break
-            if found:
-                break
-        if not found:
-            print "\n...no matching event found...\n"
+            if not found:
+                print "\n...no matching event found...\n"
             
      
     def print_calendar(self):

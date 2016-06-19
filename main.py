@@ -15,7 +15,6 @@ if __name__ == '__main__':
     info = Info()
     info.start_text()
     function = Functions()
-    KEY = ""
     if isfile('termine.enc'):
         function.xml_to_cal()
     else:
