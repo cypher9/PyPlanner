@@ -200,7 +200,7 @@ class Functions(object):
         print("\nAvailable Calendars:")
         for cal in self.cal_list:   
             if cal is None:
-                print("There are no calendars to show! \n Go on and create one.")
+                print("There are no calendars to show! \nGo on and create one.")
             else:
                 print cal.calendar_title
         print "\n\n"   
@@ -210,6 +210,8 @@ class Functions(object):
         cal_name = str(raw_input("\nSelect calendar: "))
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is not None:
+            if len(cal.eventlist) < 1:
+                print("Ther are no events in this calendar! \nGo on and create one.")
             for event in cal.eventlist:
                 self.print_event(event)
         else:
