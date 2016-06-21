@@ -1,8 +1,17 @@
 # PyPlanner
-python commandline tool for saving events privately
+python commandline tool for saving events encrypted
 
-what is working v0.0.5-beta:
+PyPlanner encrypts the content of your calendar using AES-CBC encryption.
+Your password will not be saved anywhere and is a SHA256 hash while runtime.
+!!!If you lost your password ther is no option to recover your calendar!!!
+
+Prerequisites:
+- python27 (not tested with other versions)
+- PyCrypto
+
+what is working v1.0.0-beta:
 - add a new event
+- create different calendars
 - add a new event to specific calendar
 - search by string
 - search by date
@@ -12,13 +21,17 @@ what is working v0.0.5-beta:
 - delete event
 - show year/month calendar
 - help
+- change password
+- quit PyPlanner
 
 
 ToDo:
-v0.0.x-beta
-- bug fixes
+- build an installer
+- bugfixes
+- performance improvements
+- UX improvements
+- search events by date
+- show next upcoming event
 
-v0.x.x-beta
-- encryption with pycrypto
 
 
