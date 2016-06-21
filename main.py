@@ -41,6 +41,7 @@ suboptions_search = {1 : function.search_by_string,
 suboptions_view = {1 : function.show_calendars,
                    2 : function.show_events,
                    3 : function.show_next_event,
+                   4 : function.show_timeframe,
                    0 : function.return_to_main,
 }
 
@@ -65,7 +66,7 @@ while True:
                     suboptions_search[sub_opt]()   
             elif option == 3:
                 sub_opt = options[option]()
-                if sub_opt <  0 or sub_opt > 3:
+                if sub_opt <  0 or sub_opt > 4:
                     print ("\n...not a valid input...\n")
                 else:
                     suboptions_view[sub_opt]()

@@ -60,7 +60,7 @@ class Functions(object):
         try:
             self.cal_list = []
             xml_root = get_root()
-            for cal in xml_root.findall('cal'):
+            for cal in xml_root.findall('calendar'):
                 if cal is None:
                     break
                 else:
@@ -197,11 +197,11 @@ class Functions(object):
     
         
     def show_calendars(self):
-        print("\nAvailable Calendars:")
-        for cal in self.cal_list:   
-            if cal is None:
-                print("There are no calendars to show! \nGo on and create one.")
-            else:
+        print("\nAvailable Calendars:")   
+        if len(self.cal_list) < 1:
+            print("There are no calendars to show! \nGo on and create one.")
+        else:
+            for cal in self.cal_list:
                 print cal.calendar_title
         print "\n\n"   
     
@@ -211,9 +211,10 @@ class Functions(object):
         cal = self.first(cal for cal in self.cal_list if cal.calendar_title == cal_name)
         if cal is not None:
             if len(cal.eventlist) < 1:
-                print("Ther are no events in this calendar! \nGo on and create one.")
-            for event in cal.eventlist:
-                self.print_event(event)
+                print("There are no events in this calendar! \nGo on and create one.")
+            else:
+                for event in cal.eventlist:
+                    self.print_event(event)
         else:
             print("\n...no calendar found...\n")
             
@@ -232,7 +233,28 @@ class Functions(object):
             self.print_event(next_event)
         else:
             print"\n...no upcoming events...\n"
-                      
+            
+    def show_timeframe(self):
+        print("Enter the timeframe...")
+        wrong_input = True
+        while wrong_input:
+            try:    
+                start_date_frame = datetime.strptime(str(raw_input("Start(YYYY-MM-DD): ")), '%Y-%m-%d')
+                wrong_input = False
+            except ValueError:
+                print("\n...incorrect date value...\n")
+        wrong_input = True
+        while wrong_input:
+            try:    
+                end_date_frame = datetime.strptime(str(raw_input("End(YYYY-MM-DD): ")), '%Y-%m-%d')
+                wrong_input = False
+            except ValueError:
+                print("\n...incorrect date value...\n")
+                
+        for cal in self.cal_list:
+            for event in cal.eventlist:
+                if event.event_start_datetime.date() >= start_date_frame.date() and event.event_end_datetime.date() <= end_date_frame.date():
+                    self.print_event(event) 
     
     def delete_calendar(self):
         cal_name = str(raw_input("\nSelect calendar: "))
