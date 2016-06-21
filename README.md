@@ -7,16 +7,18 @@ Your password will not be saved anywhere and is a SHA256 hash while runtime.
 
 Prerequisites:
 - python27 (not tested with other versions)
-- PyCrypto
+- PyCrypto (get the latest version here: https://www.dlitz.net/software/pycrypto/)
 
-what is working v1.0.0-beta:
+what is working v1.1.0:
 - add a new event
 - create different calendars
 - add a new event to specific calendar
 - search by string
 - search by date
-- view calendars
-- view events from specific calendar
+- show calendars
+- show events from specific calendar
+- show next upcoming event
+- show events in selected timeframe
 - delete calendar
 - delete event
 - show year/month calendar

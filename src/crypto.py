@@ -3,7 +3,7 @@ Created on 08.06.2016
 
 @author: cypher9
 '''
-import random, base64, hashlib, getpass, sys
+import random, base64, hashlib, getpass
 from Crypto.Cipher import AES
 
 
@@ -24,7 +24,7 @@ def get_password():
 def set_password():
     global KEY
     not_matching = True
-    print("\nSet new password for Pyplanner!\n(Password must be at least 5 characters!)")
+    print("\nSet new password for PyPlanner!\n(Password must be at least 5 characters!)")
     while not_matching:
         password = get_password()
         if len(password) < 5:
