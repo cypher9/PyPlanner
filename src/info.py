@@ -9,7 +9,7 @@ class Info(object):
     Info of version and tool
     '''
     def start_text(self):
-        print("PyPlanner v1.0.0-beta")
+        print("PyPlanner v1.1.0")
         print("--")
         print("PyPlanner is a simple commandline tool for keeping up with your appointments and events")
         print("PyPlanner encrypts your database with PyCrypto to make your stuff really private ")
