@@ -3,7 +3,7 @@ python commandline tool for saving events encrypted
 
 PyPlanner encrypts the content of your calendar using AES-CBC encryption.
 Your password will not be saved anywhere and is a SHA256 hash while runtime.
-!!!If you lost your password ther is no option to recover your calendar!!!
+!!!If you loose your password there is no option to recover your calendar!!!
 
 Prerequisites:
 - python27 (not tested with other versions)
