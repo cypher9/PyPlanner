@@ -33,7 +33,6 @@ ToDo:
 - performance improvements
 - UX improvements
 - search events by date
-- show next upcoming event
 
 
 
